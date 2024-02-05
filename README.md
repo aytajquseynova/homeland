@@ -1,16 +1,12 @@
-## First Steps
-### Creating authentication system
-- composer require laravel/ui [ for creating authentication system]
-- npm install && npm run dev 
-in there 
-- npm install
-- npm run dev
-- npm install -g create-vite
-- create-vite my-vite-project
-cd my-vite-project
-npm install
-npm run dev
-- migrate
-
-
+## Getting started and first steps
+- Design and code for the project
+- Creating a new laravel project and running the server
+- Creating authentication system
+- Integrating our theme
+## Getting main features done
+- Working with home page
+- Displaying properties
+- Displaying propery details
+- Displaying related products
+- Sharing properties on social media
 
