@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
+
         <div class="site-blocks-cover overlay" style="background-image: url({{ asset('assets/images/hero_bg_2.jpg') }});"
-            data-aos="fade" data-stellar-background-ratio="0.5">
+        data-aos="fade" >
             <div class="container">
                 <div class="row align-items-center justify-content-center text-center">
                     <div class="col-md-10">
@@ -13,7 +13,7 @@
             </div>
         </div>
         {{-- Register form --}}
-                    <div class="col-md-12" data-aos="fade-up" data-aos-delay="100">
+                    <div class="col-md-12 " data-aos="fade-up" data-aos-delay="100">
                         <h3 class="h4 text-black widget-title mb-3">Register</h3>
                         <form method="POST" action="{{ route('register') }}" class="form-contact-agent">
                             @csrf
@@ -61,5 +61,5 @@
                             </div>
                         </form>
                     </div>
-    </div>
+
 @endsection
