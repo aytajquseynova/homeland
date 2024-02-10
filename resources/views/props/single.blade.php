@@ -89,21 +89,34 @@
                     <div class="bg-white widget border rounded">
 
                         <h3 class="h4 text-black widget-title mb-3">Contact Agent</h3>
-                        <form action="" class="form-contact-agent">
+                        <form method="POST" action="{{ route('insert.request', $singleProp->id) }}"
+                            class="form-contact-agent">
+                            @csrf
+                            <div class="form-group">
+                                <label for="name">prop_id</label>
+                                <input type="text" value="{{ $singleProp->id }}" id="name" name="prop_id"
+                                    type="hidden" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="name">Agent Name</label>
+                                <input type="text" id="name" name="agent_name" type="hidden"
+                                    value="{{ $singleProp->agent_name }}" class="form-control">
+                            </div>
                             <div class="form-group">
                                 <label for="name">Name</label>
-                                <input type="text" id="name" class="form-control">
+                                <input type="text" id="name" name="name" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label for="email">Email</label>
-                                <input type="email" id="email" class="form-control">
+                                <input type="email" id="email" name="email" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label for="phone">Phone</label>
-                                <input type="text" id="phone" class="form-control">
+                                <input type="text" id="phone" name="phone" class="form-control">
                             </div>
                             <div class="form-group">
-                                <input type="submit" id="phone" class="btn btn-primary" value="Send Message">
+                                <input type="submit" id="phone" name="submit" class="btn btn-primary"
+                                    value="Send Request">
                             </div>
                         </form>
                     </div>

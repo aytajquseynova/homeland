@@ -13,19 +13,19 @@ return new class extends Migration
     {
         Schema::create('properties', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->string('price');
-            $table->string('image');
-            $table->string('beds');
-            $table->string('baths');
-            $table->string('sq_ft');
-            $table->string('home_type');
-            $table->string('year_built');
-            $table->string('price_sqft');
-            $table->text('more_info');
-            $table->string('location');
-            $table->string('agent_name');
-            $table->string('type');
+            $table->string('title')->default('');
+            $table->string('price')->default('');
+            $table->string('image')->default('');
+            $table->string('beds')->default('');
+            $table->string('baths')->default('');
+            $table->string('sq_ft')->default('');
+            $table->string('home_type')->default('');
+            $table->string('year_built')->default('');
+            $table->string('price_sqft')->default('');
+            $table->text('more_info')->nullable();
+            $table->string('location')->default('');
+            $table->string('agent_name')->default('');
+            $table->string('type')->default('');
             $table->timestamps();
         });
     }
