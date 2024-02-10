@@ -9,4 +9,7 @@
 - Displaying propery details
 - Displaying related products
 - Sharing properties on social media
+## Sending requests to agents and saving properties and more
+- Inserting requests
+- Validating request form
 

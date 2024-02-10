@@ -14,6 +14,15 @@
             </div>
         </div>
     </div>
+
+    @if (\Session::has('success'))
+        <div class="alert alert-success col-md-6 mx-auto" style="padding: 5px; margin-bottom: 5px;">
+            <p class="text-center">{{ session('success') }}</p>
+        </div>
+    @endif
+
+
+
     <div class="site-section site-section-sm">
         <div class="container">
             <div class="row">
@@ -89,36 +98,57 @@
                     <div class="bg-white widget border rounded">
 
                         <h3 class="h4 text-black widget-title mb-3">Contact Agent</h3>
-                        <form method="POST" action="{{ route('insert.request', $singleProp->id) }}"
-                            class="form-contact-agent">
-                            @csrf
-                            <div class="form-group">
-                                <label for="name">prop_id</label>
-                                <input type="text" value="{{ $singleProp->id }}" id="name" name="prop_id"
-                                    type="hidden" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label for="name">Agent Name</label>
-                                <input type="text" id="name" name="agent_name" type="hidden"
-                                    value="{{ $singleProp->agent_name }}" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label for="name">Name</label>
-                                <input type="text" id="name" name="name" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label for="email">Email</label>
-                                <input type="email" id="email" name="email" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label for="phone">Phone</label>
-                                <input type="text" id="phone" name="phone" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <input type="submit" id="phone" name="submit" class="btn btn-primary"
-                                    value="Send Request">
-                            </div>
-                        </form>
+                        @if ($validateFormCount > 0)
+                            <p class="alert alert-success"> You already sent a request to this property</p>
+                        @else
+                            <form method="POST" action="{{ route('insert.request', $singleProp->id) }}"
+                                class="form-contact-agent">
+                                @csrf
+                                <div class="form-group">
+                                    <label for="name">prop_id</label>
+                                    <input type="text" value="{{ $singleProp->id }}" id="name" name="prop_id"
+                                        type="hidden" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="name">Agent Name</label>
+                                    <input type="text" id="name" name="agent_name" type="hidden"
+                                        value="{{ $singleProp->agent_name }}" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="name">Name</label>
+                                    <input type="text" id="name" name="name" class="form-control">
+                                </div>
+                                @error('name')
+                                    <span class="text-danger" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input type="email" id="email" name="email" class="form-control">
+                                </div>
+                                @error('email')
+                                    <span class="text-danger" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                                <div class="form-group">
+                                    <label for="phone">Phone</label>
+                                    <input type="text" id="phone" name="phone" class="form-control">
+                                </div>
+                                @error('phone')
+                                    <span class="text-danger" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                                <div class="form-group">
+                                    <input type="submit" id="phone" name="submit" class="btn btn-primary"
+                                        value="Send Request">
+                                </div>
+                            </form>
+                        @endif
+
+
                     </div>
 
                     <div class="bg-white widget border rounded">
