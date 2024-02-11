@@ -15,3 +15,5 @@
 - Saving properties
 - Validating saving properties
 - Displaying properties by type 
+- Displaying properties based on 
+home type

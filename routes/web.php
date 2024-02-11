@@ -41,3 +41,8 @@ Route::post('props/save-props/{id}', [App\Http\Controllers\Props\PropertiesContr
 // Displaying props by rent and buy
 Route::get('props/type/Buy', [App\Http\Controllers\Props\PropertiesController::class, 'propsBuy'])->name('buy.prop');
 Route::get('props/type/Rent', [App\Http\Controllers\Props\PropertiesController::class, 'propsRent'])->name('rent.prop');
+
+
+// Displaying props by home type
+Route::get('props/home_type/{home_type}', [App\Http\Controllers\Props\PropertiesController::class, 'displayByHomeType'])->name('display.prop.hometype');
+
