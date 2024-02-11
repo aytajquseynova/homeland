@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Prop\AllRequest;
 use App\Models\Prop\Property;
 use App\Models\Prop\PropImage;
+use App\Models\Prop\SavedProp;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -34,12 +35,23 @@ class PropertiesController extends Controller
 
         // validating form request
 
-        $validateFormCount = AllRequest::where('prop_id', $id)
+        if (Auth::check()) {
+            // Check if the user is authenticated
+            $validateFormCount = AllRequest::where('prop_id', $id)
+                ->where('user_id', Auth::user()->id)
+                ->count();
+        } else {
+            // Handle the case where the user is not authenticated
+            $validateFormCount = 0; // or any other default value or logic
+        }
+
+        // validating saving properties
+
+        $validateSavingPropsCount = SavedProp::where('prop_id', $id)
             ->where('user_id', Auth::user()->id)
             ->count();
 
-
-        return view('props.single', compact('singleProp', 'props', 'propImages', 'relatedProps', 'validateFormCount'));
+        return view('props.single', compact('singleProp', 'props', 'propImages', 'relatedProps', 'validateFormCount', 'validateSavingPropsCount'));
     }
 
     public function insertRequests(Request $request)
@@ -72,7 +84,70 @@ class PropertiesController extends Controller
         if ($insertRequest) {
             return redirect('/props/prop-details/' . $request->prop_id . '')->with('success', 'Request added successfully');
         }
+    }
 
-        echo 'request is completed';
+    public function saveProps(Request $request, $id)
+    {
+        if ($request->isMethod('post')) {
+
+            $saveProp = SavedProp::create([
+                'user_id' => Auth::user()->id,
+                'prop_id' => $request->prop_id,
+                'title' => $request->title,
+                'image' => $request->image,
+                'location' => $request->location,
+                'price' => $request->price,
+            ]);
+
+            if ($saveProp) {
+                return redirect('/props/save-props/' . $request->prop_id)->with('save', 'Property saved successfully');
+            }
+        } elseif ($request->isMethod('get')) {
+
+            $singleProp = Property::find($id);
+            $propImages = PropImage::where('prop_id', $id)->get();
+            $props = Property::select()->take(9)->orderBy('created_at', 'desc')->get();
+            $relatedProps = Property::where('home_type', $singleProp->home_type)
+                ->where('id', '!=', $id)
+                ->take(3)
+                ->orderBy('created_at', 'desc')
+                ->get();
+
+            if (Auth::check()) {
+                // Check if the user is authenticated
+                $validateFormCount = SavedProp::where('prop_id', $id)
+                    ->where('user_id', Auth::user()->id)
+                    ->count();
+            } else {
+                // Handle the case where the user is not authenticated
+                $validateFormCount = 0; // or any other default value or logic
+            }
+
+            $validateSavingPropsCount = SavedProp::where('prop_id', $id)
+                ->where('user_id', Auth::user()->id)
+                ->count();
+
+            // Return the view with the form
+            return view('props.single', compact('singleProp', 'propImages', 'props', 'relatedProps', 'validateFormCount', 'validateSavingPropsCount'));
+        }
+
+        // Handle other cases or show an error message
+        return redirect()->back()->with('error', 'Invalid request method');
+    }
+
+    public function propsBuy()
+    {
+        $type = "Buy";
+        $propsbuys = Property::where('type', $type)->get();
+
+        return view('props.propsbuy', compact('propsbuys'));
+    }
+
+    public function propsRent()
+    {
+        $type = "Rent";
+        $propsrents = Property::where('type', $type)->get();
+
+        return view('props.propsrent', compact('propsrents'));
     }
 }

@@ -12,4 +12,6 @@
 ## Sending requests to agents and saving properties and more
 - Inserting requests
 - Validating request form
-
+- Saving properties
+- Validating saving properties
+- Displaying properties by type 

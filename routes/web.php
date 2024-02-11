@@ -32,3 +32,12 @@ Route::get('props/prop-details/{id}', [App\Http\Controllers\Props\PropertiesCont
 // Inserting requests
 
 Route::post('props/prop-details/{id}', [App\Http\Controllers\Props\PropertiesController::class, 'insertRequests'])->name('insert.request');
+
+//  Saving props
+Route::get('props/save-props/{id}', [App\Http\Controllers\Props\PropertiesController::class, 'saveProps'])->name('show.save.form');
+Route::post('props/save-props/{id}', [App\Http\Controllers\Props\PropertiesController::class, 'saveProps'])->name('save.prop');
+
+
+// Displaying props by rent and buy
+Route::get('props/type/Buy', [App\Http\Controllers\Props\PropertiesController::class, 'propsBuy'])->name('buy.prop');
+Route::get('props/type/Rent', [App\Http\Controllers\Props\PropertiesController::class, 'propsRent'])->name('rent.prop');
