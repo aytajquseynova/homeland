@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Foundation\Bootstrap\RegisterProviders;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -17,14 +18,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Auth::routes();
 
 
-Route::get('/home', [App\Http\Controllers\Props\PropertiesController::class, 'index'])->name('home');
+Route::get('/', [App\Http\Controllers\Props\PropertiesController::class, 'index'])->name('home');
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::get('/register', [RegisterController::class, 'showRegisterForm'])->name('register');
 Route::get('props/prop-details/{id}', [App\Http\Controllers\Props\PropertiesController::class, 'single'])->name('single.prop');
@@ -46,3 +47,13 @@ Route::get('props/type/Rent', [App\Http\Controllers\Props\PropertiesController::
 // Displaying props by home type
 Route::get('props/home_type/{home_type}', [App\Http\Controllers\Props\PropertiesController::class, 'displayByHomeType'])->name('display.prop.hometype');
 
+//  Displaying props by price
+
+Route::get('props/price-asc', [App\Http\Controllers\Props\PropertiesController::class, 'priceAsc'])->name('price.asc.prop');
+Route::get('props/price-desc', [App\Http\Controllers\Props\PropertiesController::class, 'priceDesc'])->name('price.desc.prop');
+//  Displaying contact and about pages
+Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
+
+
+//  about
+Route::get('/about', [HomeController::class, 'about'])->name('about');

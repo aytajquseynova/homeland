@@ -17,3 +17,7 @@
 - Displaying properties by type 
 - Displaying properties based on 
 home type
+
+## Creating users pages and searching for properties
+- Working with contact and about pages
+- Displaying properties by price

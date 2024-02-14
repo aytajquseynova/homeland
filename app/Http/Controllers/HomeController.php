@@ -27,4 +27,13 @@ class HomeController extends Controller
         $props = Property::all();
         return view('home', compact('props'));
     }
+
+    public function contact(){
+        return view('pages.contact');
+    }
+
+    public function about()
+    {
+        return view('pages.about');
+    }
 }
