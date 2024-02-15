@@ -69,6 +69,10 @@ Route::group(
     }
 );
 
+//  Displaying contact and about pages
+Route::get('/admin/login', [App\Http\Controllers\Admins\AdminsController::class, 'viewLogin'])->name('view.login');
+Route::post('/admin/check-login', [App\Http\Controllers\Admins\AdminsController::class, 'checkLogin'])->name('check.login');
+Route::get('/admin/index', [App\Http\Controllers\Admins\AdminsController::class, 'index'])->name('admins.dashboard');
 
 
 //  Displaying contact and about pages

@@ -28,3 +28,7 @@ user
 - Cleaning routes up
 - Searching for properties
 - Validating users pages
+
+## Getting started with admin panel
+- Code and design for admin panel
+- Creating custom login system
