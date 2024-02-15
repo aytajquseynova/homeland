@@ -32,3 +32,4 @@ user
 ## Getting started with admin panel
 - Code and design for admin panel
 - Creating custom login system
+- Validating authentication system

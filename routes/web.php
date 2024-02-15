@@ -29,6 +29,8 @@ Route::get('/', [App\Http\Controllers\Props\PropertiesController::class, 'index'
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::get('/register', [RegisterController::class, 'showRegisterForm'])->name('register');
 
+
+
 Route::group(['prefix' => 'props'], function () {
     Route::get('prop-details/{id}', [App\Http\Controllers\Props\PropertiesController::class, 'single'])->name('single.prop');
 
@@ -56,7 +58,6 @@ Route::group(['prefix' => 'props'], function () {
 
     // searching for props
     Route::any('search', [App\Http\Controllers\Props\PropertiesController::class, 'searchProps'])->name('search.prop');
-
 });
 
 
@@ -69,10 +70,13 @@ Route::group(
     }
 );
 
-//  Displaying contact and about pages
-Route::get('/admin/login', [App\Http\Controllers\Admins\AdminsController::class, 'viewLogin'])->name('view.login');
+
+Route::get('/admin/login', [App\Http\Controllers\Admins\AdminsController::class, 'viewLogin'])->name('view.login')->middleware('checkforauth');
 Route::post('/admin/check-login', [App\Http\Controllers\Admins\AdminsController::class, 'checkLogin'])->name('check.login');
-Route::get('/admin/index', [App\Http\Controllers\Admins\AdminsController::class, 'index'])->name('admins.dashboard');
+//  middleware
+Route::group(['prefix' => 'admin', 'middleware'=>'auth:admin'], function () {
+    Route::get('index', [App\Http\Controllers\Admins\AdminsController::class, 'index'])->name('admins.dashboard');
+});
 
 
 //  Displaying contact and about pages
