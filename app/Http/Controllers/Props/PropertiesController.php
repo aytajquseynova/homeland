@@ -23,10 +23,13 @@ class PropertiesController extends Controller
     {
         $singleProp = Property::find($id);
         $propImages = PropImage::where('prop_id', $id)->get();
-        $props = Property::select()->take(9)->orderBy('created_at', 'desc')->get();
+        $props = Property::take(9)->orderBy('created_at', 'desc')->get();
+
+        // Initialize variables
+        $validateFormCount = 0; // default value
+        $validateSavingPropsCount = 0; // default value
 
         // related props
-
         $relatedProps = Property::where('home_type', $singleProp->home_type)
             ->where('id', '!=', $id)
             ->take(3)
@@ -34,25 +37,23 @@ class PropertiesController extends Controller
             ->get();
 
         // validating form request
+        if (auth()->user()) {
+            if (Auth::check()) {
+                // Check if the user is authenticated
+                $validateFormCount = AllRequest::where('prop_id', $id)
+                    ->where('user_id', Auth::user()->id)
+                    ->count();
+            }
 
-        if (Auth::check()) {
-            // Check if the user is authenticated
-            $validateFormCount = AllRequest::where('prop_id', $id)
+            // validating saving properties
+            $validateSavingPropsCount = SavedProp::where('prop_id', $id)
                 ->where('user_id', Auth::user()->id)
                 ->count();
-        } else {
-            // Handle the case where the user is not authenticated
-            $validateFormCount = 0; // or any other default value or logic
         }
-
-        // validating saving properties
-
-        $validateSavingPropsCount = SavedProp::where('prop_id', $id)
-            ->where('user_id', Auth::user()->id)
-            ->count();
 
         return view('props.single', compact('singleProp', 'props', 'propImages', 'relatedProps', 'validateFormCount', 'validateSavingPropsCount'));
     }
+
 
     public function insertRequests(Request $request)
     {
@@ -159,7 +160,8 @@ class PropertiesController extends Controller
         return view('props.propshometype', compact('propsByHomeTypes', 'hometype'));
     }
 
-    public function priceAsc(){
+    public function priceAsc()
+    {
         $propsByPriceAsc = Property::select()->orderBy('price', 'asc')->get();
 
         return view('props.propspriceasc', compact('propsByPriceAsc'));
@@ -173,4 +175,25 @@ class PropertiesController extends Controller
         return view('props.propspricedesc', compact('propsByPriceDesc'));
     }
 
+    // searching for props
+
+    public function searchProps(Request $request)
+    {
+        $request->validate([
+            'home_type' => 'required',
+            'type' => 'required',
+            'city' => 'required',
+        ]);
+
+        $home_type = $request->input('home_type');
+        $type = $request->input('type');
+        $city = $request->input('city');
+
+        $searches = Property::where('home_type', 'like', "%$home_type%")
+            ->where('type', 'like', "%$type%")
+            ->where('city', 'like', "%$city%")
+            ->get();
+
+        return view('props.searches', compact('searches'));
+    }
 }

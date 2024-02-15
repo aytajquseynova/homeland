@@ -21,3 +21,10 @@ home type
 ## Creating users pages and searching for properties
 - Working with contact and about pages
 - Displaying properties by price
+- Validating and cleaning up
+- Displaying requests for every user
+- Displaying saved properties for every 
+user
+- Cleaning routes up
+- Searching for properties
+- Validating users pages

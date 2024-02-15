@@ -73,8 +73,8 @@
                                         @endforeach
                                     </ul>
                                 </li>
-                                <li><a href="{{route('about')}}">About</a></li>
-                                <li><a href="{{route('contact')}}">Contact</a></li>
+                                <li><a href="{{ route('about') }}">About</a></li>
+                                <li><a href="{{ route('contact') }}">Contact</a></li>
                                 @guest
                                     @if (Route::has('login'))
                                         <li><a href="{{ route('login') }}">Login</a></li>
@@ -87,22 +87,31 @@
                                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#"
                                             role="button" data-bs-toggle="dropdown" aria-haspopup="true"
                                             aria-expanded="false" v-pre>
-                                            {{ Auth::user()->name }}
+                                            {{ Auth::check() ? Auth::user()->name : '' }}
                                         </a>
 
                                         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                            <a class="dropdown-item" href="{{ route('logout') }}"
-                                                onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                                {{ __('Logout') }}
-                                            </a>
-
-                                            <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                                class="d-none">
-                                                @csrf
-                                            </form>
+                                            @auth
+                                                <a class="dropdown-item" href="{{ route('all.requests') }}">
+                                                    {{ __('All requests') }}
+                                                </a>
+                                                <a class="dropdown-item" href="{{ route('all.saved.props') }}">
+                                                    {{ __('All saved props') }}
+                                                </a>
+                                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                                    {{ __('Logout') }}
+                                                </a>
+                                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                                    class="d-none">
+                                                    @csrf
+                                                </form>
+                                            @else
+                                            @endauth
                                         </div>
+
                                     </li>
+
                                 @endguest
                             </ul>
                         </nav>
