@@ -38,3 +38,9 @@ user
 - Working with index page
 - Displaying all admins
 - Creating new admins
+
+## Working with home types
+- Displaying all home types
+- Creating new home types
+- Updating home types
+- Deleting home types

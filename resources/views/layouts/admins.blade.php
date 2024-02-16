@@ -26,11 +26,25 @@
                     <ul class="navbar-nav side-nav">
                         @auth('admin')
                             <li class="nav-item">
-                                <a class="nav-link text-white" style="margin-left: 20px;" href="index.html">Home
+                                <a class="nav-link text-white" style="margin-left: 20px;" href="{{route('admins.dashboard')}}">Home
                                     <span class="sr-only">(current)</span>
                                 </a>
                             </li>
-                            <!-- Other menu items for admins -->
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{route('admins.display')}}" style="margin-left: 20px;">Admins</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{route('admins.hometypes')}}"
+                                    style="margin-left: 20px;">Hometypes</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="properties-admins/show-properties.html"
+                                    style="margin-left: 20px;">Properties</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="requests-admins/show-requests.html"
+                                    style="margin-left: 20px;">Requests</a>
+                            </li>
                         </ul>
                         <ul class="navbar-nav ml-md-auto d-md-flex">
                             <li class="nav-item">
