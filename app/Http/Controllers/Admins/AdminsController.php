@@ -3,13 +3,23 @@
 namespace App\Http\Controllers\Admins;
 
 use App\Http\Controllers\Controller;
+use App\Models\Admin\Admin;
+use App\Models\Prop\HomeType;
+use App\Models\Prop\Property;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\AdminStoreRequest;
 
 class AdminsController extends Controller
 {
 
-    public function index(){
-        return view('admins.index');
+    public function index()
+    {
+        $props_count = Property::select()->count();
+        $home_types_count = HomeType::select()->count();
+        $adminsCount = Admin::select()->count();
+
+        return view('admins.index', compact('props_count', 'home_types_count', 'adminsCount'));
     }
     public function viewLogin()
     {
@@ -26,4 +36,33 @@ class AdminsController extends Controller
             return redirect()->back()->with(['error' => 'Error logging in']);
         }
     }
+
+    public function allAdmins()
+    {
+        $allAdmins = Admin::all();
+        return view('admins.admins', compact('allAdmins'));
+    }
+
+    public function createAdmins()
+    {
+
+        return view('admins.create');
+    }
+
+
+
+    public function storeAdmins(AdminStoreRequest $request)
+    {
+        $storeAdmins = Admin::create([
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'password' => Hash::make($request->input('password')),
+        ]);
+
+        if ($storeAdmins) {
+            return redirect()->route('admins.display')->with('success', 'Admin added successfully');
+
+        }
+    }
+
 }

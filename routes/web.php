@@ -76,6 +76,10 @@ Route::post('/admin/check-login', [App\Http\Controllers\Admins\AdminsController:
 //  middleware
 Route::group(['prefix' => 'admin', 'middleware'=>'auth:admin'], function () {
     Route::get('index', [App\Http\Controllers\Admins\AdminsController::class, 'index'])->name('admins.dashboard');
+    Route::get('allAdmins', [App\Http\Controllers\Admins\AdminsController::class, 'allAdmins'])->name('admins.display');
+
+    Route::get('createAdmins', [App\Http\Controllers\Admins\AdminsController::class, 'createAdmins'])->name('admins.create');
+    Route::post('createAdmins', [App\Http\Controllers\Admins\AdminsController::class, 'storeAdmins'])->name('admins.store');
 });
 
 

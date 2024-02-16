@@ -30,21 +30,7 @@
                                     <span class="sr-only">(current)</span>
                                 </a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="admins/admins.html" style="margin-left: 20px;">Admins</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="hometypes-admins/show-hometype.html"
-                                    style="margin-left: 20px;">Hometypes</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="properties-admins/show-properties.html"
-                                    style="margin-left: 20px;">Properties</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="requests-admins/show-requests.html"
-                                    style="margin-left: 20px;">Requests</a>
-                            </li>
+                            <!-- Other menu items for admins -->
                         </ul>
                         <ul class="navbar-nav ml-md-auto d-md-flex">
                             <li class="nav-item">
@@ -62,22 +48,24 @@
                                         onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
+                                </div> <!-- Close the dropdown-menu div -->
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
                             </li>
-                        @else
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('view.login') }}">login
-                                    <span class="sr-only">(current)</span>
-                                </a>
-                            </li>
-                        @endauth
-
+                        </ul>
+                    @else
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('view.login') }}">login
+                                <span class="sr-only">(current)</span>
+                            </a>
+                        </li>
+                    @endauth
                     </ul>
                 </div>
             </div>
         </nav>
+
         <div class="container-fluid">
             <main class="py-4">
                 @yield('content')

@@ -33,3 +33,8 @@ user
 - Code and design for admin panel
 - Creating custom login system
 - Validating authentication system
+
+## Working with admins section
+- Working with index page
+- Displaying all admins
+- Creating new admins
