@@ -26,15 +26,17 @@
                     <ul class="navbar-nav side-nav">
                         @auth('admin')
                             <li class="nav-item">
-                                <a class="nav-link text-white" style="margin-left: 20px;" href="{{route('admins.dashboard')}}">Home
+                                <a class="nav-link text-white" style="margin-left: 20px;"
+                                    href="{{ route('admins.dashboard') }}">Home
                                     <span class="sr-only">(current)</span>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{route('admins.display')}}" style="margin-left: 20px;">Admins</a>
+                                <a class="nav-link" href="{{ route('admins.display') }}"
+                                    style="margin-left: 20px;">Admins</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{route('admins.hometypes')}}"
+                                <a class="nav-link" href="{{ route('admins.hometypes') }}"
                                     style="margin-left: 20px;">Hometypes</a>
                             </li>
                             <li class="nav-item">
@@ -42,7 +44,7 @@
                                     style="margin-left: 20px;">Properties</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="requests-admins/show-requests.html"
+                                <a class="nav-link" href="{{ route('admins.allRequests') }}"
                                     style="margin-left: 20px;">Requests</a>
                             </li>
                         </ul>

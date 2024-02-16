@@ -9,6 +9,7 @@ use App\Models\Prop\Property;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\AdminStoreRequest;
+use App\Models\Prop\AllRequest;
 
 class AdminsController extends Controller
 {
@@ -61,8 +62,12 @@ class AdminsController extends Controller
 
         if ($storeAdmins) {
             return redirect()->route('admins.display')->with('success', 'Admin added successfully');
-
         }
     }
 
+    public function allRequests()
+    {
+        $requests = AllRequest::all();
+        return view('admins.requests', compact('requests'));
+    }
 }

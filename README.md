@@ -44,3 +44,6 @@ user
 - Creating new home types
 - Updating home types
 - Deleting home types
+
+## Working with properties
+- Displaying requests

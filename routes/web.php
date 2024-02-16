@@ -94,6 +94,11 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function () {
 
     //  delete home type
     Route::get('deleteHomeTypes/{id}', [App\Http\Controllers\Admins\HometypesController::class, 'deleteHomeTypes'])->name('admins.delete.hometypes');
+
+    // display all requests
+
+    Route::get('allRequests', [App\Http\Controllers\Admins\AdminsController::class, 'allRequests'])->name('admins.allRequests');
+
 });
 
 

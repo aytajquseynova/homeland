@@ -77,4 +77,7 @@ class HometypesController extends Controller
             return redirect()->route('admins.hometypes')->with('delete', 'Home type deleted successfully');
         }
     }
+
+
+    
 }
