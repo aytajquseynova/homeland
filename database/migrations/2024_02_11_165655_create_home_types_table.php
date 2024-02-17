@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('home_types', function (Blueprint $table) {
             $table->id();
             $table->string('hometypes');
-            
             $table->timestamps();
         });
     }

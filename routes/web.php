@@ -99,6 +99,25 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function () {
 
     Route::get('allRequests', [App\Http\Controllers\Admins\AdminsController::class, 'allRequests'])->name('admins.allRequests');
 
+
+    //  props
+
+    Route::get('allProps', [App\Http\Controllers\Admins\AdminsController::class, 'allProps'])->name('admins.allProps');
+
+    // create props
+    Route::get('createProps', [App\Http\Controllers\Admins\AdminsController::class, 'createProps'])->name('admins.createProps');
+    Route::post('createProps', [App\Http\Controllers\Admins\AdminsController::class, 'storeProps'])->name('admins.storeProps');
+
+
+    // create gallery
+
+    Route::get('createGallery', [App\Http\Controllers\Admins\AdminsController::class, 'createGallery'])->name('admins.createGallery');
+    Route::post('createGallery', [App\Http\Controllers\Admins\AdminsController::class, 'storeGallery'])->name('admins.storeGallery');
+
+    //  delete props
+
+    Route::get('deleteProps/{id}', [App\Http\Controllers\Admins\AdminsController::class, 'deleteProps'])->name('admins.propsDelete');
+
 });
 
 

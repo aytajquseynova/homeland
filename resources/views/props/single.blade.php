@@ -34,7 +34,7 @@
                     <div>
                         <div class="slide-one-item home-slider owl-carousel">
                             @foreach ($propImages as $propImage)
-                                <div><img src="{{ asset('assets/images/' . $propImage->image . '') }}" alt="Image"
+                                <div><img src="{{ asset('assets/images_gallery/' . $propImage->image) }}" alt="Image"
                                         class="img-fluid">
                                 </div>
                             @endforeach
@@ -87,10 +87,11 @@
                             </div>
                             @foreach ($propImages as $propImage)
                                 <div class="col-sm-6 col-md-4 col-lg-3">
-                                    <a href="{{ asset('assets/images/' . $propImage->image . '') }}"
-                                        class="image-popup gal-item"><img
-                                            src="{{ asset('assets/images/' . $propImage->image . '') }}" alt="Image"
-                                            class="img-fluid"></a>
+                                    <a href="{{ asset('assets/images_gallery/' . $propImage->image) }}"
+                                        class="image-popup gal-item">
+                                        <img src="{{ asset('assets/images_gallery/' . $propImage->image) }}" alt="Image"
+                                            class="img-fluid">
+                                    </a>
                                 </div>
                             @endforeach
 
@@ -152,13 +153,13 @@
                                     </div>
                                 </form>
                             @endif
-                              @else
-                                <div class="form-group">
-                                    <a class="alert alert-success" href="{{ route('login') }}">Login </a>
-                                    <p class="alert alert-success mt-2">to send e request to
-                                        this property</p>
-                                </div>
-                            @endif
+                        @else
+                            <div class="form-group">
+                                <a class="alert alert-success" href="{{ route('login') }}">Login </a>
+                                <p class="alert alert-success mt-2">to send e request to
+                                    this property</p>
+                            </div>
+                        @endif
 
                     </div>
 

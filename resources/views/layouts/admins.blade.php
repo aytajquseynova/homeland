@@ -40,7 +40,7 @@
                                     style="margin-left: 20px;">Hometypes</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="properties-admins/show-properties.html"
+                                <a class="nav-link" href="{{route('admins.allProps')}}"
                                     style="margin-left: 20px;">Properties</a>
                             </li>
                             <li class="nav-item">
